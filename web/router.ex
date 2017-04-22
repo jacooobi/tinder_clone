@@ -24,10 +24,10 @@ defmodule TinderClone.Router do
     plug :accepts, ["json"]
   end
 
-  # scope "/" do
-  #   pipe_through :browser
-  #   coherence_routes()
-  # end
+  scope "/" do
+    pipe_through :browser
+    coherence_routes()
+  end
 
   scope "/" do
     pipe_through :protected
