@@ -2,7 +2,7 @@ defmodule TinderClone.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", TinderClone.RoomChannel
+  channel "room:*", TinderClone.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
