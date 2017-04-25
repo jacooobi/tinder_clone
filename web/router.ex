@@ -39,6 +39,8 @@ defmodule TinderClone.Router do
     pipe_through :protected # Use the default browser stack
 
     get "/", PageController, :index
+    post "/contact/:id", ContactController, :create
+    delete "/contact/:id", ContactController, :delete
   end
 
   # Other scopes may use custom stacks.
