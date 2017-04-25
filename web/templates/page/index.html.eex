@@ -1,5 +1,5 @@
 <div class="chat container">
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="panel panel-default chat-room">
       <div class="panel-heading">
         Hello <%= Coherence.current_user(@conn).name %>
@@ -12,13 +12,13 @@
                          placeholder="Type a message…">
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <div class="panel panel-default chat-room">
       <div class="panel-heading">
         Users
       </div>
-      <div class="panel-body panel-users" id="online-users">
-        <ul class="simple-list">
+      <div class="panel-body panel-users">
+        <ul>
           <%= for user <- @users do %>
             <li>
               <%= user.name %>
