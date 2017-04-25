@@ -2,7 +2,7 @@
   <div class="col-md-9">
     <div class="panel panel-default chat-room">
       <div class="panel-heading">
-        Hello <%#= Coherence.current_user(@conn).name %>
+        Hello <%= Coherence.current_user(@conn).name %>
         <%= link "Sign out", to: session_path(@conn, :delete),
                                  method: :delete %>
       </div>
@@ -15,9 +15,18 @@
   <div class="col-md-3">
     <div class="panel panel-default chat-room">
       <div class="panel-heading">
-        Online Users
+        Users
       </div>
       <div class="panel-body panel-users" id="online-users">
+        <ul class="simple-list">
+          <%= for user <- @users do %>
+            <li>
+              <%= user.name %>
+              <%= contact_link(@conn, user.id) %>
+              <%= chat_link(@conn, user.id) %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>
