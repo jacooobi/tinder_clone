@@ -14,9 +14,8 @@ defmodule TinderClone.PageView do
   def chat_link(conn, user_id) do
     cur_user_id = conn.assigns.current_user.id
     if User.matched?(cur_user_id, user_id) do
-      room_name = Match.room_name_for(cur_user_id, user_id)
-      link("Chat with me!", to: "/private_room/#{room_name}")
-
+      match = Match.get_match_for(cur_user_id, user_id)
+      link("Chat with me!", to: "/private_room/#{match.room_name}")
     end
   end
 end

@@ -10,6 +10,6 @@ defmodule TinderClone.PageController do
 
   defp users_list_without_current(user_id) do
     query = from u in "users", where: not u.id in [^user_id], select: %{id: u.id, email: u.email, name: u.name}
-    query |> Repo.all()
+    query |> Repo.all
   end
 end

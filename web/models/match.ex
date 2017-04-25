@@ -21,14 +21,11 @@ defmodule TinderClone.Match do
     |> validate_required([:room_name])
   end
 
-  def room_name_for(user_1, user_2) do
+  def get_match_for(user_1, user_2) do
     query_a = from m in Match, where: m.user_a_id == ^user_1, where: m.user_b_id == ^user_2
     query_b = from m in Match, where: m.user_a_id == ^user_2, where: m.user_b_id == ^user_1
 
-    [match] = Repo.all(query_a) ++ Repo.all(query_b) |> Enum.uniq
-
-    match.room_name
+    Repo.all(query_a) ++ Repo.all(query_b)
+    |> List.first
   end
-
-
 end

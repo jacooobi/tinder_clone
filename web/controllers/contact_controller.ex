@@ -10,7 +10,6 @@ defmodule TinderClone.ContactController do
 
     if User.matched?(favorited_user_id, current_user_id) do
       Repo.insert(%Match{room_name: room_name_generator(), user_a_id: favorited_user_id, user_b_id: current_user_id})
-
     end
 
     redirect(conn, to: "/")
@@ -19,12 +18,15 @@ defmodule TinderClone.ContactController do
   def delete(conn, params) do
     { favorited_user_id, current_user_id } = fetch_ids(conn, params)
 
+    if User.matched?(favorited_user_id, current_user_id) do
+      Match.get_match_for(favorited_user_id, current_user_id)
+      |> Repo.delete
+    end
 
     query = from c in Contact, where: c.user_id == ^current_user_id, where: c.contact_id == ^favorited_user_id, limit: 1
-    [contact] = Repo.all(query)
-    Repo.delete(contact)
+    Repo.all(query) |> List.first |> Repo.delete
+
     redirect(conn, to: "/")
-    # render conn, "index.html", users: users
   end
 
   defp fetch_ids(conn, params) do
@@ -34,5 +36,4 @@ defmodule TinderClone.ContactController do
   defp room_name_generator do
     :crypto.strong_rand_bytes(32) |> Base.encode16 |> String.downcase
   end
-
 end
