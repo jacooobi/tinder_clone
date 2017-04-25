@@ -4,7 +4,6 @@ defmodule TinderClone.PageController do
   alias TinderClone.{Repo, User}
 
   def index(conn, _params) do
-    render conn, "index.html"
     users = conn.assigns[:current_user].id |> users_list_without_current
     render conn, "index.html", users: users
   end
