@@ -1,7 +1,7 @@
 defmodule TinderClone.PageController do
   use TinderClone.Web, :controller
 
-  alias TinderClone.{Repo, User}
+  alias TinderClone.Repo
 
   def index(conn, _params) do
     users = conn.assigns[:current_user].id |> users_list_without_current

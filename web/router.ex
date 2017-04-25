@@ -25,6 +25,8 @@ defmodule TinderClone.Router do
     plug :accepts, ["json"]
   end
 
+
+
   scope "/" do
     pipe_through :browser
     coherence_routes()
@@ -44,13 +46,13 @@ defmodule TinderClone.Router do
     delete "/contact/:id", ContactController, :delete
   end
 
+
   # Other scopes may use custom stacks.
   # scope "/api", TinderClone do
   #   pipe_through :api
   # end
 
   defp put_user_token(conn, _) do
-    current_user = Coherence.current_user(conn).id
     user_id_token = Phoenix.Token.sign(conn, "user_id",
                     Coherence.current_user(conn).id)
     conn
