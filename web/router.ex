@@ -39,6 +39,7 @@ defmodule TinderClone.Router do
     pipe_through :protected # Use the default browser stack
 
     get "/", PageController, :index
+    get "/private_room/:id", RoomController, :show
     post "/contact/:id", ContactController, :create
     delete "/contact/:id", ContactController, :delete
   end
