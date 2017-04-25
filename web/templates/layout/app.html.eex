@@ -16,7 +16,7 @@
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+            <li><a href="/">Home Page</a></li>
           </ul>
         </nav>
         <span class="logo"></span>
@@ -30,6 +30,7 @@
       </main>
 
     </div> <!-- /container -->
+    <script>window.userToken = "<%= assigns[:user_id] %>"</script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
