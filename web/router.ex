@@ -25,8 +25,6 @@ defmodule TinderClone.Router do
     plug :accepts, ["json"]
   end
 
-
-
   scope "/" do
     pipe_through :browser
     coherence_routes()
@@ -38,19 +36,13 @@ defmodule TinderClone.Router do
   end
 
   scope "/", TinderClone do
-    pipe_through :protected # Use the default browser stack
+    pipe_through :protected
 
     get "/", PageController, :index
     get "/private_room/:id", RoomController, :show
     post "/contact/:id", ContactController, :create
     delete "/contact/:id", ContactController, :delete
   end
-
-
-  # Other scopes may use custom stacks.
-  # scope "/api", TinderClone do
-  #   pipe_through :api
-  # end
 
   defp put_user_token(conn, _) do
     user_id_token = Phoenix.Token.sign(conn, "user_id",
