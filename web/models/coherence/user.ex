@@ -7,15 +7,15 @@ defmodule TinderClone.User do
   schema "users" do
     field :name, :string
     field :email, :string
-    many_to_many :contacts, TinderClone.User, join_through: TinderClone.Contact, join_keys: [user_id: :id, contact_id: :id]
-    coherence_schema
+    many_to_many :contacts, TinderClone.User, join_through: TinderClone.Contact, join_keys: [user_id: :id, contact_id: :id], on_delete: :delete_all
+    coherence_schema()
 
-    timestamps
+    timestamps()
   end
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, [:name, :email] ++ coherence_fields)
+    |> cast(params, [:name, :email] ++ coherence_fields())
     |> validate_required([:name, :email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
@@ -33,4 +33,3 @@ defmodule TinderClone.User do
     favorited_by?(user_a, user_b) && favorited_by?(user_b, user_a)
   end
  end
-
