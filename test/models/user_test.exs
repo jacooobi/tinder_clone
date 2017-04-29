@@ -3,7 +3,7 @@ defmodule TinderClone.UserTest do
 
   import TinderClone.Factory
 
-  alias TinderClone.{User, Contact}
+  alias TinderClone.User
 
   @valid_attrs %{
     name: "user",

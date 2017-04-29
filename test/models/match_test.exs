@@ -3,7 +3,7 @@ defmodule TinderClone.MatchTest do
 
   import TinderClone.Factory
 
-  alias TinderClone.{Match, User}
+  alias TinderClone.Match
 
   @valid_attrs %{room_name: "superlongstringwithrandomcharacters"}
 
