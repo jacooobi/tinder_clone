@@ -3,21 +3,17 @@ defmodule TinderClone.Match do
 
   alias TinderClone.{Match, Repo}
 
-
   schema "matches" do
     field :room_name, :string
-    belongs_to :user_a, TinderClone.UserA
-    belongs_to :user_b, TinderClone.UserB
+    belongs_to :user_a, TinderClone.User
+    belongs_to :user_b, TinderClone.User
 
     timestamps()
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:room_name])
+    |> cast(params, [:room_name, :user_a_id, :user_b_id])
     |> validate_required([:room_name])
   end
 
@@ -27,5 +23,14 @@ defmodule TinderClone.Match do
 
     Repo.all(query_a) ++ Repo.all(query_b)
     |> List.first
+  end
+
+  def generate_room_name do
+    name = :crypto.strong_rand_bytes(32) |> Base.encode16 |> String.downcase
+
+    case Repo.get_by(Match, room_name: name) do
+      nil -> name
+      _ -> generate_room_name()
+    end
   end
 end
